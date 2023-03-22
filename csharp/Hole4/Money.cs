@@ -12,6 +12,10 @@ namespace Hole4
             this.value = value;
             this.currency = currency;
         }
+        public static Money Create(int value, string currency)
+        {
+            return new Money(value, currency);
+        }
 
         public Money Plus(Money other)
         {
@@ -20,7 +24,18 @@ namespace Hole4
                 throw new Incalculable();
             }
 
-            return new Money(value + other.value, other.currency);
+            return Create(value + other.value, other.currency);
+        }
+
+
+        public Money Minus(Money other)
+        {
+            if (!currency.Equals(other.currency))
+            {
+                throw new Incalculable();
+            }
+
+            return Create(value - other.value, currency);
         }
     }
 }
